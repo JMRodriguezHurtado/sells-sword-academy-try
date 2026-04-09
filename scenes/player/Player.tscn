@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dhxouxnhax7iw"]
+
+[ext_resource type="Script" uid="uid://d3pb8dnybcct3" path="res://scripts/PlayerController.cs" id="1_wr5hl"]
+[ext_resource type="Texture2D" uid="uid://cnibwjbuskxvv" path="res://icon.svg" id="2_gfjak"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfjak"]
+radius = 30.0
+height = 60.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1895949645]
+script = ExtResource("1_wr5hl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=689408429]
+shape = SubResource("CapsuleShape2D_gfjak")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1039555118]
+texture = ExtResource("2_gfjak")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=466659905]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.35
+drag_top_margin = 0.35
+drag_right_margin = 0.34
+drag_bottom_margin = 0.35
