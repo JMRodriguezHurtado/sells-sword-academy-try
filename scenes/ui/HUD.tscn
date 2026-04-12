@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://4oj2fidvnrrn"]
+
+[ext_resource type="Script" uid="uid://bcbp3tqm6ij38" path="res://scripts/HUD.cs" id="1_kw0id"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hc4fa"]
+bg_color = Color(0.2901961, 0.05882353, 0.05882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kw0id"]
+bg_color = Color(0.8784314, 0.1882353, 0.1882353, 1)
+
+[node name="HUD" type="Control" unique_id=790525531]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kw0id")
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=157783980]
+
+[node name="HealthBarContainer" type="Control" parent="UILayer" unique_id=1440981229]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="UILayer/HealthBarContainer" unique_id=91065994]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 47.0
+theme_override_styles/background = SubResource("StyleBoxFlat_hc4fa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kw0id")
+value = 100.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="UILayer/HealthBarContainer" unique_id=1389854800]
+layout_mode = 0
+offset_top = 25.0
+offset_right = 40.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
