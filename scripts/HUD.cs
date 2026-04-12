@@ -11,7 +11,8 @@ public partial class HUD : Control
 		_healthBar = GetNode<ProgressBar>("UILayer/HealthBarContainer/HealthBar");
 		_healthLabel = GetNode<Label>("UILayer/HealthBarContainer/HealthLabel");
 
-		_playerHealth = GetTree().GetFirstNodeInGroup("player") as PlayerHealth;
+		var player = GetTree().GetFirstNodeInGroup("player");
+		_playerHealth = player?.GetNode<PlayerHealth>("PlayerHealth");
 
 		if (_playerHealth != null)
 		{
