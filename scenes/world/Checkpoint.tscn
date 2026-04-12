@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dg4vp7akyccat"]
+
+[ext_resource type="Script" uid="uid://c7a0rj0ww7lj6" path="res://scripts/Checkpoint.cs" id="1_d2u6e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhko8"]
+size = Vector2(20, 41)
+
+[node name="Checkpoint" type="Area2D" unique_id=344630328]
+script = ExtResource("1_d2u6e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1666671955]
+position = Vector2(60, 130.5)
+shape = SubResource("RectangleShape2D_fhko8")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1379144307]
+color = Color(1, 0.16078432, 0.21960784, 1)
+polygon = PackedVector2Array(48, 111, 48, 151, 72, 150, 72, 110)

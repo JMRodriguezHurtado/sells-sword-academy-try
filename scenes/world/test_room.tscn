@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://d3d4aij7x0jpb"]
 
 [ext_resource type="PackedScene" uid="uid://dhxouxnhax7iw" path="res://scenes/player/Player.tscn" id="1_hgl0x"]
+[ext_resource type="Script" uid="uid://m6l8p5l2yb80" path="res://scripts/GameManager.cs" id="2_3gt1g"]
+[ext_resource type="PackedScene" uid="uid://dg4vp7akyccat" path="res://scenes/world/Checkpoint.tscn" id="3_cy37o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it3e4"]
 size = Vector2(1944.5, 203)
@@ -45,3 +47,9 @@ polygon = PackedVector2Array(1810, 183, 1810, 888, 1997, 895, 1987, 177)
 
 [node name="Player" parent="." unique_id=1895949645 instance=ExtResource("1_hgl0x")]
 position = Vector2(582, 487)
+
+[node name="GameManager" type="Node" parent="." unique_id=1880158972]
+script = ExtResource("2_3gt1g")
+
+[node name="Checkpoint" parent="." unique_id=344630328 instance=ExtResource("3_cy37o")]
+position = Vector2(911, 390)

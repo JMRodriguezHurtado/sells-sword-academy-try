@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3pb8dnybcct3" path="res://scripts/PlayerController.cs" id="1_wr5hl"]
 [ext_resource type="Texture2D" uid="uid://cnibwjbuskxvv" path="res://icon.svg" id="2_gfjak"]
+[ext_resource type="Script" uid="uid://d3v4f806ivl6a" path="res://scripts/PlayerHealth.cs" id="3_4kuee"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfjak"]
 radius = 30.0
@@ -25,3 +26,6 @@ drag_left_margin = 0.35
 drag_top_margin = 0.35
 drag_right_margin = 0.34
 drag_bottom_margin = 0.35
+
+[node name="PlayerHealth" type="Node" parent="." unique_id=1912753880]
+script = ExtResource("3_4kuee")
