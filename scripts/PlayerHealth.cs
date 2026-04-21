@@ -14,7 +14,7 @@ public partial class PlayerHealth : Node
 	private float _flashTimer = 0f;
 	private bool _flashVisible = true;
 	private CharacterBody2D _player;
-	private Sprite2D _sprite;
+	private AnimatedSprite2D _sprite;
 	private Vector2 _startPosition;
 
 	// Signal so other systems (HUD, enemies) can react to health changes
@@ -25,7 +25,7 @@ public partial class PlayerHealth : Node
 	{
 		CurrentHealth = MaxHealth;
 		_player = GetParent<CharacterBody2D>();
-		_sprite = _player.GetNode<Sprite2D>("Sprite2D");
+		_sprite = _player.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_startPosition = _player.GlobalPosition;
 	}
 
