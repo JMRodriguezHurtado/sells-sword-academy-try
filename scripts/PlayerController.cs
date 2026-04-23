@@ -7,29 +7,34 @@ public partial class PlayerController : CharacterBody2D
 	[Export] public float DashSpeed = 800.0f;
 	[Export] public float DashDuration = 0.15f;
 	[Export] public float DashCooldown = 0.5f;
-	[Export] public float HurtDuration = 0.4f; // how long hurt animation plays
+	[Export] public float HurtDuration = 0.4f;
+	[Export] public float AttackDuration = 0.4f;
 
 	private AnimatedSprite2D _sprite;
 	private PlayerHealth _playerHealth;
+	private AttackHitbox _attackHitbox;
 	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	private int _facingDirection = 1;
 	private bool _isDashing = false;
 	private bool _isBackDash = false;
-	private bool _isHurt = false; // NEW
+	private bool _isHurt = false;
+	private bool _isAttacking = false;
 	private float _dashTimer = 0f;
 	private float _dashCooldownTimer = 0f;
-	private float _hurtTimer = 0f; // NEW
+	private float _hurtTimer = 0f;
+	private float _attackTimer = 0f;
 
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_playerHealth = GetNode<PlayerHealth>("PlayerHealth");
 		_playerHealth.HealthChanged += OnHealthChanged;
+		_attackHitbox = GetNode<AttackHitbox>("AttackHitbox");
+		_attackHitbox.DeactivateHitbox();
 	}
 
 	private void OnHealthChanged(int currentHealth, int maxHealth)
 	{
-		// Only trigger hurt if we actually lost health (not a heal)
 		if (currentHealth < maxHealth && !_playerHealth.IsDead)
 			TriggerHurt();
 	}
@@ -57,13 +62,32 @@ public partial class PlayerController : CharacterBody2D
 			if (_hurtTimer <= 0f)
 				_isHurt = false;
 
-			// Still apply gravity and movement during hurt
 			if (!IsOnFloor())
 				velocity.Y += _gravity * fDelta;
 
 			Velocity = velocity;
 			MoveAndSlide();
-			return; // Skip input and animation logic
+			return;
+		}
+
+		// --- ATTACK STATE ---
+		if (_isAttacking)
+		{
+			_attackTimer -= fDelta;
+
+			if (_attackTimer <= 0f)
+			{
+				_isAttacking = false;
+				_attackHitbox.DeactivateHitbox();
+			}
+
+			velocity.X = 0f;
+			if (!IsOnFloor())
+				velocity.Y += _gravity * fDelta;
+
+			Velocity = velocity;
+			MoveAndSlide();
+			return;
 		}
 
 		// --- DASH STATE ---
@@ -108,8 +132,27 @@ public partial class PlayerController : CharacterBody2D
 		if (Mathf.Abs(direction) > 0.2f)
 			_facingDirection = direction > 0f ? 1 : -1;
 
+		// --- ATTACK INPUT ---
+		if (Input.IsActionJustPressed("attack1") && IsOnFloor())
+		{
+			_isAttacking = true;
+			_attackTimer = AttackDuration;
+			_sprite.FlipH = _facingDirection == -1;
+			PlayAnimation("attack1", force: true);
+
+			// Position hitbox in front of player
+			_attackHitbox.Position = new Vector2(80 * _facingDirection, 0);
+			_attackHitbox.Scale = new Vector2(_facingDirection, 1);
+			_attackHitbox.ActivateHitbox();
+
+			velocity.X = 0f;
+			Velocity = velocity;
+			MoveAndSlide();
+			return;
+		}
+
 		// --- DASH INPUT ---
-		if (IsOnFloor() && _dashCooldownTimer <= 0f)
+		if (!_isAttacking && IsOnFloor() && _dashCooldownTimer <= 0f)
 		{
 			if (Input.IsActionJustPressed("dash_forward"))
 				StartDash(ref velocity, _facingDirection, isBack: false);
@@ -148,9 +191,9 @@ public partial class PlayerController : CharacterBody2D
 		velocity.Y = 0f;
 	}
 
-	private void PlayAnimation(string animName)
+	private void PlayAnimation(string animName, bool force = false)
 	{
-		if (_sprite.Animation != new StringName(animName))
+		if (force || _sprite.Animation != new StringName(animName))
 			_sprite.Play(animName);
 	}
 

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d4f07hllcgmrb" path="res://assets/sprites/david/jump.png" id="5_tpg5x"]
 [ext_resource type="Texture2D" uid="uid://lubbohokjs0a" path="res://assets/sprites/david/hurt.png" id="5_v42im"]
 [ext_resource type="Texture2D" uid="uid://cgu75wla1smko" path="res://assets/sprites/david/walk.png" id="6_c3xxp"]
+[ext_resource type="Script" uid="uid://dgndr2q5stnb1" path="res://scripts/AttackHitbox.cs" id="10_7oing"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfjak"]
 radius = 30.0
@@ -111,7 +112,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack1",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -192,6 +193,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn6s4"]
+size = Vector2(20, 45)
+
 [node name="Player" type="CharacterBody2D" unique_id=1895949645 groups=["player"]]
 script = ExtResource("1_wr5hl")
 
@@ -216,3 +220,10 @@ script = ExtResource("3_4kuee")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_p1lr0")
 animation = &"attack1"
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1593276756]
+script = ExtResource("10_7oing")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1087538323]
+position = Vector2(80, 0.5)
+shape = SubResource("RectangleShape2D_pn6s4")
