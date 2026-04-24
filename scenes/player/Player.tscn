@@ -5,10 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://c8yscj6fbf14e" path="res://assets/sprites/david/attack1.png" id="3_7oing"]
 [ext_resource type="Texture2D" uid="uid://dc8hdx3eh4sh8" path="res://assets/sprites/david/backDash.png" id="3_npwbq"]
 [ext_resource type="Texture2D" uid="uid://c28uw4no07cn8" path="res://assets/sprites/david/frontDash.png" id="3_pn6s4"]
+[ext_resource type="Texture2D" uid="uid://dbller8qq3uwa" path="res://assets/sprites/david/attack2_1.png" id="4_ov1oi"]
 [ext_resource type="Texture2D" uid="uid://bv58xri75w5a7" path="res://assets/sprites/david/idle.png" id="4_pn6s4"]
+[ext_resource type="Texture2D" uid="uid://dec7frxn3fws4" path="res://assets/sprites/david/attack2_2.png" id="5_rn7t0"]
 [ext_resource type="Texture2D" uid="uid://d4f07hllcgmrb" path="res://assets/sprites/david/jump.png" id="5_tpg5x"]
 [ext_resource type="Texture2D" uid="uid://lubbohokjs0a" path="res://assets/sprites/david/hurt.png" id="5_v42im"]
+[ext_resource type="Texture2D" uid="uid://b6wmhsed428h8" path="res://assets/sprites/david/attack2_3.png" id="6_8qjgm"]
 [ext_resource type="Texture2D" uid="uid://cgu75wla1smko" path="res://assets/sprites/david/walk.png" id="6_c3xxp"]
+[ext_resource type="Texture2D" uid="uid://cofcig0cfynek" path="res://assets/sprites/david/attack2_4.png" id="7_ejd4k"]
 [ext_resource type="Script" uid="uid://dgndr2q5stnb1" path="res://scripts/AttackHitbox.cs" id="10_7oing"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfjak"]
@@ -112,6 +116,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("4_ov1oi")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_rn7t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8qjgm")
+}, {
+"duration": 1.5,
+"texture": ExtResource("7_ejd4k")
+}],
+"loop": true,
+"name": &"attack2",
 "speed": 12.0
 }, {
 "frames": [{
@@ -219,7 +240,7 @@ script = ExtResource("3_4kuee")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1743698520]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_p1lr0")
-animation = &"attack1"
+animation = &"frontDash"
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1593276756]
 script = ExtResource("10_7oing")

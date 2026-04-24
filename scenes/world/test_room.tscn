@@ -48,7 +48,7 @@ color = Color(0.8026962, 0.59883565, 0.2019574, 1)
 polygon = PackedVector2Array(1810, 183, 1810, 888, 1997, 895, 1987, 177)
 
 [node name="Player" parent="." unique_id=1895949645 instance=ExtResource("1_hgl0x")]
-position = Vector2(582, 487)
+position = Vector2(593, 517)
 
 [node name="GameManager" type="Node" parent="." unique_id=1880158972]
 script = ExtResource("2_3gt1g")

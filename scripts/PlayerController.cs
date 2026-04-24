@@ -9,6 +9,11 @@ public partial class PlayerController : CharacterBody2D
 	[Export] public float DashCooldown = 0.5f;
 	[Export] public float HurtDuration = 0.4f;
 	[Export] public float AttackDuration = 0.4f;
+	[Export] public float Attack2Duration = 0.6f; // slightly longer due to wind up
+	[Export] public float Attack2Cooldown = 0.5f;
+	[Export] public int Attack1Damage = 20;
+	[Export] public int Attack2Damage = 30;
+	[Export] public float Attack2Knockback = 350.0f;
 
 	private AnimatedSprite2D _sprite;
 	private PlayerHealth _playerHealth;
@@ -23,6 +28,7 @@ public partial class PlayerController : CharacterBody2D
 	private float _dashCooldownTimer = 0f;
 	private float _hurtTimer = 0f;
 	private float _attackTimer = 0f;
+	private float _attack2CooldownTimer = 0f;
 
 	public override void _Ready()
 	{
@@ -54,6 +60,8 @@ public partial class PlayerController : CharacterBody2D
 
 		if (_dashCooldownTimer > 0f)
 			_dashCooldownTimer -= fDelta;
+		if (_attack2CooldownTimer > 0f)
+			_attack2CooldownTimer -= fDelta;
 
 		// --- HURT STATE ---
 		if (_isHurt)
@@ -132,19 +140,21 @@ public partial class PlayerController : CharacterBody2D
 		if (Mathf.Abs(direction) > 0.2f)
 			_facingDirection = direction > 0f ? 1 : -1;
 
-		// --- ATTACK INPUT ---
+		// --- ATTACK 1 INPUT ---
 		if (Input.IsActionJustPressed("attack1") && IsOnFloor())
 		{
-			_isAttacking = true;
-			_attackTimer = AttackDuration;
-			_sprite.FlipH = _facingDirection == -1;
-			PlayAnimation("attack1", force: true);
+			StartAttack("attack1", AttackDuration, Attack1Damage, 0f);
+			velocity.X = 0f;
+			Velocity = velocity;
+			MoveAndSlide();
+			return;
+		}
 
-			// Position hitbox in front of player
-			_attackHitbox.Position = new Vector2(80 * _facingDirection, 0);
-			_attackHitbox.Scale = new Vector2(_facingDirection, 1);
-			_attackHitbox.ActivateHitbox();
-
+		// --- ATTACK 2 INPUT ---
+		if (Input.IsActionJustPressed("attack2") && IsOnFloor() && _attack2CooldownTimer <= 0f)
+		{
+			StartAttack("attack2", Attack2Duration, Attack2Damage, Attack2Knockback);
+			_attack2CooldownTimer = Attack2Cooldown;
 			velocity.X = 0f;
 			Velocity = velocity;
 			MoveAndSlide();
@@ -179,6 +189,19 @@ public partial class PlayerController : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	private void StartAttack(string animName, float duration, int damage, float knockback)
+	{
+		_isAttacking = true;
+		_attackTimer = duration;
+		_sprite.FlipH = _facingDirection == -1;
+		PlayAnimation(animName, force: true);
+
+		_attackHitbox.Position = new Vector2(80 * _facingDirection, 0);
+		_attackHitbox.Scale = new Vector2(_facingDirection, 1);
+		_attackHitbox.Configure(damage, knockback, _facingDirection);
+		_attackHitbox.ActivateHitbox();
 	}
 
 	private void StartDash(ref Vector2 velocity, int direction, bool isBack)
