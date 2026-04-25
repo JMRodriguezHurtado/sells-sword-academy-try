@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d3d4aij7x0jpb"]
 
-[ext_resource type="PackedScene" uid="uid://dhxouxnhax7iw" path="res://scenes/player/Player.tscn" id="1_hgl0x"]
+[ext_resource type="PackedScene" uid="uid://dhxouxnhax7iw" path="res://scenes/player/David.tscn" id="1_hgl0x"]
 [ext_resource type="Script" uid="uid://m6l8p5l2yb80" path="res://scripts/GameManager.cs" id="2_3gt1g"]
 [ext_resource type="PackedScene" uid="uid://dg4vp7akyccat" path="res://scenes/world/Checkpoint.tscn" id="3_cy37o"]
 [ext_resource type="PackedScene" uid="uid://4oj2fidvnrrn" path="res://scenes/ui/HUD.tscn" id="4_ytumw"]

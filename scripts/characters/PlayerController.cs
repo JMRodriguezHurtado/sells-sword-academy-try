@@ -1,5 +1,8 @@
 using Godot;
 
+// Base class for all playable characters (David, Clark, Megan).
+// Contains shared movement, gravity, jump, dash, hurt, and animation framework.
+// Character-specific attacks and abilities go in the derived classes.
 public partial class PlayerController : CharacterBody2D
 {
 	[Export] public float Speed = 300.0f;
@@ -8,36 +11,28 @@ public partial class PlayerController : CharacterBody2D
 	[Export] public float DashDuration = 0.15f;
 	[Export] public float DashCooldown = 0.5f;
 	[Export] public float HurtDuration = 0.4f;
-	[Export] public float AttackDuration = 0.4f;
-	[Export] public float Attack2Duration = 0.6f; // slightly longer due to wind up
-	[Export] public float Attack2Cooldown = 0.5f;
-	[Export] public int Attack1Damage = 20;
-	[Export] public int Attack2Damage = 30;
-	[Export] public float Attack2Knockback = 350.0f;
 
-	private AnimatedSprite2D _sprite;
-	private PlayerHealth _playerHealth;
-	private AttackHitbox _attackHitbox;
-	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-	private int _facingDirection = 1;
-	private bool _isDashing = false;
-	private bool _isBackDash = false;
-	private bool _isHurt = false;
-	private bool _isAttacking = false;
-	private float _dashTimer = 0f;
-	private float _dashCooldownTimer = 0f;
-	private float _hurtTimer = 0f;
-	private float _attackTimer = 0f;
-	private float _attack2CooldownTimer = 0f;
+	protected AnimatedSprite2D _sprite;
+	protected PlayerHealth _playerHealth;
+	protected float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	protected int _facingDirection = 1;
+	protected bool _isDashing = false;
+	protected bool _isBackDash = false;
+	protected bool _isHurt = false;
+	protected float _dashTimer = 0f;
+	protected float _dashCooldownTimer = 0f;
+	protected float _hurtTimer = 0f;
 
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_playerHealth = GetNode<PlayerHealth>("PlayerHealth");
 		_playerHealth.HealthChanged += OnHealthChanged;
-		_attackHitbox = GetNode<AttackHitbox>("AttackHitbox");
-		_attackHitbox.DeactivateHitbox();
+		OnReady();
 	}
+
+	// Override in derived classes for character-specific setup
+	protected virtual void OnReady() { }
 
 	private void OnHealthChanged(int currentHealth, int maxHealth)
 	{
@@ -45,7 +40,7 @@ public partial class PlayerController : CharacterBody2D
 			TriggerHurt();
 	}
 
-	public void TriggerHurt()
+	public virtual void TriggerHurt()
 	{
 		_isHurt = true;
 		_hurtTimer = HurtDuration;
@@ -60,8 +55,9 @@ public partial class PlayerController : CharacterBody2D
 
 		if (_dashCooldownTimer > 0f)
 			_dashCooldownTimer -= fDelta;
-		if (_attack2CooldownTimer > 0f)
-			_attack2CooldownTimer -= fDelta;
+
+		// Let derived class update its own timers/cooldowns
+		UpdateTimers(fDelta);
 
 		// --- HURT STATE ---
 		if (_isHurt)
@@ -78,21 +74,9 @@ public partial class PlayerController : CharacterBody2D
 			return;
 		}
 
-		// --- ATTACK STATE ---
-		if (_isAttacking)
+		// --- CHARACTER-SPECIFIC STATES (attacks, etc.) ---
+		if (HandleCharacterStates(ref velocity, fDelta))
 		{
-			_attackTimer -= fDelta;
-
-			if (_attackTimer <= 0f)
-			{
-				_isAttacking = false;
-				_attackHitbox.DeactivateHitbox();
-			}
-
-			velocity.X = 0f;
-			if (!IsOnFloor())
-				velocity.Y += _gravity * fDelta;
-
 			Velocity = velocity;
 			MoveAndSlide();
 			return;
@@ -140,29 +124,16 @@ public partial class PlayerController : CharacterBody2D
 		if (Mathf.Abs(direction) > 0.2f)
 			_facingDirection = direction > 0f ? 1 : -1;
 
-		// --- ATTACK 1 INPUT ---
-		if (Input.IsActionJustPressed("attack1") && IsOnFloor())
+		// --- CHARACTER-SPECIFIC INPUT (attacks, abilities) ---
+		if (HandleCharacterInput(ref velocity))
 		{
-			StartAttack("attack1", AttackDuration, Attack1Damage, 0f);
-			velocity.X = 0f;
-			Velocity = velocity;
-			MoveAndSlide();
-			return;
-		}
-
-		// --- ATTACK 2 INPUT ---
-		if (Input.IsActionJustPressed("attack2") && IsOnFloor() && _attack2CooldownTimer <= 0f)
-		{
-			StartAttack("attack2", Attack2Duration, Attack2Damage, Attack2Knockback);
-			_attack2CooldownTimer = Attack2Cooldown;
-			velocity.X = 0f;
 			Velocity = velocity;
 			MoveAndSlide();
 			return;
 		}
 
 		// --- DASH INPUT ---
-		if (!_isAttacking && IsOnFloor() && _dashCooldownTimer <= 0f)
+		if (IsOnFloor() && _dashCooldownTimer <= 0f)
 		{
 			if (Input.IsActionJustPressed("dash_forward"))
 				StartDash(ref velocity, _facingDirection, isBack: false);
@@ -170,7 +141,7 @@ public partial class PlayerController : CharacterBody2D
 				StartDash(ref velocity, -_facingDirection, isBack: true);
 		}
 
-		// --- ANIMATION ---
+		// --- DEFAULT ANIMATION ---
 		if (!IsOnFloor())
 		{
 			PlayAnimation("jump");
@@ -191,18 +162,16 @@ public partial class PlayerController : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	private void StartAttack(string animName, float duration, int damage, float knockback)
-	{
-		_isAttacking = true;
-		_attackTimer = duration;
-		_sprite.FlipH = _facingDirection == -1;
-		PlayAnimation(animName, force: true);
+	// Override in derived classes to update character-specific timers (attack cooldowns, etc.)
+	protected virtual void UpdateTimers(float fDelta) { }
 
-		_attackHitbox.Position = new Vector2(80 * _facingDirection, 0);
-		_attackHitbox.Scale = new Vector2(_facingDirection, 1);
-		_attackHitbox.Configure(damage, knockback, _facingDirection);
-		_attackHitbox.ActivateHitbox();
-	}
+	// Override in derived classes to handle character-specific states (attack state, casting, etc.).
+	// Return true if the state took control this frame.
+	protected virtual bool HandleCharacterStates(ref Vector2 velocity, float fDelta) => false;
+
+	// Override in derived classes to handle character-specific input (attacks, abilities).
+	// Return true if input was consumed this frame.
+	protected virtual bool HandleCharacterInput(ref Vector2 velocity) => false;
 
 	private void StartDash(ref Vector2 velocity, int direction, bool isBack)
 	{
@@ -214,7 +183,7 @@ public partial class PlayerController : CharacterBody2D
 		velocity.Y = 0f;
 	}
 
-	private void PlayAnimation(string animName, bool force = false)
+	protected void PlayAnimation(string animName, bool force = false)
 	{
 		if (force || _sprite.Animation != new StringName(animName))
 			_sprite.Play(animName);

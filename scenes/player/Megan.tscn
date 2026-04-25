@@ -1,102 +1,102 @@
-[gd_scene format=3 uid="uid://dhxouxnhax7iw"]
+[gd_scene format=3 uid="uid://bcay24hbo0e77"]
 
-[ext_resource type="Script" uid="uid://d3pb8dnybcct3" path="res://scripts/PlayerController.cs" id="1_wr5hl"]
-[ext_resource type="Script" uid="uid://d3v4f806ivl6a" path="res://scripts/PlayerHealth.cs" id="3_4kuee"]
-[ext_resource type="Texture2D" uid="uid://c8yscj6fbf14e" path="res://assets/sprites/david/attack1.png" id="3_7oing"]
-[ext_resource type="Texture2D" uid="uid://dc8hdx3eh4sh8" path="res://assets/sprites/david/backDash.png" id="3_npwbq"]
-[ext_resource type="Texture2D" uid="uid://c28uw4no07cn8" path="res://assets/sprites/david/frontDash.png" id="3_pn6s4"]
-[ext_resource type="Texture2D" uid="uid://dbller8qq3uwa" path="res://assets/sprites/david/attack2_1.png" id="4_ov1oi"]
-[ext_resource type="Texture2D" uid="uid://bv58xri75w5a7" path="res://assets/sprites/david/idle.png" id="4_pn6s4"]
-[ext_resource type="Texture2D" uid="uid://dec7frxn3fws4" path="res://assets/sprites/david/attack2_2.png" id="5_rn7t0"]
-[ext_resource type="Texture2D" uid="uid://d4f07hllcgmrb" path="res://assets/sprites/david/jump.png" id="5_tpg5x"]
-[ext_resource type="Texture2D" uid="uid://lubbohokjs0a" path="res://assets/sprites/david/hurt.png" id="5_v42im"]
-[ext_resource type="Texture2D" uid="uid://b6wmhsed428h8" path="res://assets/sprites/david/attack2_3.png" id="6_8qjgm"]
-[ext_resource type="Texture2D" uid="uid://cgu75wla1smko" path="res://assets/sprites/david/walk.png" id="6_c3xxp"]
-[ext_resource type="Texture2D" uid="uid://cofcig0cfynek" path="res://assets/sprites/david/attack2_4.png" id="7_ejd4k"]
-[ext_resource type="Script" uid="uid://dgndr2q5stnb1" path="res://scripts/AttackHitbox.cs" id="10_7oing"]
+[ext_resource type="Script" uid="uid://cyl06qclmvv5q" path="res://scripts/characters/MeganController.cs" id="1_gmjdv"]
+[ext_resource type="Script" uid="uid://d3v4f806ivl6a" path="res://scripts/PlayerHealth.cs" id="2_ufbje"]
+[ext_resource type="Texture2D" uid="uid://c8yscj6fbf14e" path="res://assets/sprites/david/attack1.png" id="3_m11wj"]
+[ext_resource type="Texture2D" uid="uid://dbller8qq3uwa" path="res://assets/sprites/david/attack2_1.png" id="4_8kovf"]
+[ext_resource type="Texture2D" uid="uid://dec7frxn3fws4" path="res://assets/sprites/david/attack2_2.png" id="5_0jfmq"]
+[ext_resource type="Texture2D" uid="uid://b6wmhsed428h8" path="res://assets/sprites/david/attack2_3.png" id="6_r5gjh"]
+[ext_resource type="Texture2D" uid="uid://cofcig0cfynek" path="res://assets/sprites/david/attack2_4.png" id="7_5maj3"]
+[ext_resource type="Texture2D" uid="uid://dc8hdx3eh4sh8" path="res://assets/sprites/david/backDash.png" id="8_ouw68"]
+[ext_resource type="Texture2D" uid="uid://c28uw4no07cn8" path="res://assets/sprites/david/frontDash.png" id="9_noh6i"]
+[ext_resource type="Texture2D" uid="uid://lubbohokjs0a" path="res://assets/sprites/david/hurt.png" id="10_p4x53"]
+[ext_resource type="Texture2D" uid="uid://bv58xri75w5a7" path="res://assets/sprites/david/idle.png" id="11_hw7v3"]
+[ext_resource type="Texture2D" uid="uid://d4f07hllcgmrb" path="res://assets/sprites/david/jump.png" id="12_fqb43"]
+[ext_resource type="Texture2D" uid="uid://cgu75wla1smko" path="res://assets/sprites/david/walk.png" id="13_s2bvt"]
+[ext_resource type="Script" uid="uid://dgndr2q5stnb1" path="res://scripts/AttackHitbox.cs" id="14_5kbv3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfjak"]
 radius = 30.0
 height = 60.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pi3ps"]
-atlas = ExtResource("3_7oing")
+atlas = ExtResource("3_m11wj")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kswpp"]
-atlas = ExtResource("3_7oing")
+atlas = ExtResource("3_m11wj")
 region = Rect2(512, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5i4m"]
-atlas = ExtResource("3_7oing")
+atlas = ExtResource("3_m11wj")
 region = Rect2(1024, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p1lr0"]
-atlas = ExtResource("3_7oing")
+atlas = ExtResource("3_m11wj")
 region = Rect2(1536, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qjgm"]
-atlas = ExtResource("3_npwbq")
+atlas = ExtResource("8_ouw68")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejd4k"]
-atlas = ExtResource("3_npwbq")
+atlas = ExtResource("8_ouw68")
 region = Rect2(512, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kuee"]
-atlas = ExtResource("3_pn6s4")
+atlas = ExtResource("9_noh6i")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_524rm"]
-atlas = ExtResource("3_pn6s4")
+atlas = ExtResource("9_noh6i")
 region = Rect2(512, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xrq6"]
-atlas = ExtResource("5_v42im")
+atlas = ExtResource("10_p4x53")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpg5x"]
-atlas = ExtResource("4_pn6s4")
+atlas = ExtResource("11_hw7v3")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c3xxp"]
-atlas = ExtResource("4_pn6s4")
+atlas = ExtResource("11_hw7v3")
 region = Rect2(512, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npwbq"]
-atlas = ExtResource("5_tpg5x")
+atlas = ExtResource("12_fqb43")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v42im"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(0, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pn6s4"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(512, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7oing"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(1024, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5stf6"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(1536, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_180ig"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(2048, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_20koh"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(2560, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov1oi"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(3072, 0, 512, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rn7t0"]
-atlas = ExtResource("6_c3xxp")
+atlas = ExtResource("13_s2bvt")
 region = Rect2(3584, 0, 512, 1024)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p1lr0"]
@@ -120,16 +120,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 2.0,
-"texture": ExtResource("4_ov1oi")
+"texture": ExtResource("4_8kovf")
 }, {
 "duration": 0.5,
-"texture": ExtResource("5_rn7t0")
+"texture": ExtResource("5_0jfmq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_8qjgm")
+"texture": ExtResource("6_r5gjh")
 }, {
 "duration": 1.5,
-"texture": ExtResource("7_ejd4k")
+"texture": ExtResource("7_5maj3")
 }],
 "loop": true,
 "name": &"attack2",
@@ -218,7 +218,7 @@ animations = [{
 size = Vector2(20, 45)
 
 [node name="Player" type="CharacterBody2D" unique_id=1895949645 groups=["player"]]
-script = ExtResource("1_wr5hl")
+script = ExtResource("1_gmjdv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=689408429]
 shape = SubResource("CapsuleShape2D_gfjak")
@@ -235,7 +235,7 @@ drag_right_margin = 0.34
 drag_bottom_margin = 0.35
 
 [node name="PlayerHealth" type="Node" parent="." unique_id=1912753880]
-script = ExtResource("3_4kuee")
+script = ExtResource("2_ufbje")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1743698520]
 scale = Vector2(0.1, 0.1)
@@ -243,7 +243,7 @@ sprite_frames = SubResource("SpriteFrames_p1lr0")
 animation = &"frontDash"
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1593276756]
-script = ExtResource("10_7oing")
+script = ExtResource("14_5kbv3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1087538323]
 position = Vector2(80, 0.5)
