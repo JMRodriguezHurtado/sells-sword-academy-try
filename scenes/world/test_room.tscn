@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dg4vp7akyccat" path="res://scenes/world/Checkpoint.tscn" id="3_cy37o"]
 [ext_resource type="PackedScene" uid="uid://4oj2fidvnrrn" path="res://scenes/ui/HUD.tscn" id="4_ytumw"]
 [ext_resource type="PackedScene" uid="uid://4yek1gwj7wwm" path="res://scenes/world/test_dummy.tscn" id="5_fc6vu"]
+[ext_resource type="PackedScene" uid="uid://dnbxyyota1g8c" path="res://scenes/ui/PauseMenu.tscn" id="6_0u7lr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it3e4"]
 size = Vector2(1944.5, 203)
@@ -64,3 +65,5 @@ offset_bottom = -144.71402
 
 [node name="TestDummy" parent="." unique_id=1527565536 instance=ExtResource("5_fc6vu")]
 position = Vector2(1426, 491)
+
+[node name="PauseMenu" parent="." unique_id=423315336 instance=ExtResource("6_0u7lr")]
