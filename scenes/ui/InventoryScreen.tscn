@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bbt1gig5pmj2w"]
+
+[ext_resource type="Script" uid="uid://7gfv1t17h2lj" path="res://scripts/ui/InventoryScreen.cs" id="1_1w4xw"]
+
+[node name="InventoryScreen" type="CanvasLayer" unique_id=1755528370]
+script = ExtResource("1_1w4xw")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1829568102]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MainPanel" type="PanelContainer" parent="." unique_id=1056259955]
+custom_minimum_size = Vector2(900, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Root" type="VBoxContainer" parent="MainPanel" unique_id=1117339354]
+layout_mode = 2
+
+[node name="TitleBar" type="HBoxContainer" parent="MainPanel/Root" unique_id=2139302470]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainPanel/Root/TitleBar" unique_id=1413400621]
+layout_mode = 2
+text = "INVENTORY"
+
+[node name="Spacer" type="Control" parent="MainPanel/Root/TitleBar" unique_id=803199235]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="MainPanel/Root/TitleBar" unique_id=1805523013]
+layout_mode = 2
+text = "Close"
+
+[node name="Content" type="HBoxContainer" parent="MainPanel/Root" unique_id=1136335794]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainPanel/Root/Content" unique_id=281556140]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Portrait" type="ColorRect" parent="MainPanel/Root/Content/LeftPanel" unique_id=1410463603]
+custom_minimum_size = Vector2(260, 320)
+layout_mode = 2
+color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+
+[node name="BioLabel" type="Label" parent="MainPanel/Root/Content/LeftPanel" unique_id=1821961227]
+custom_minimum_size = Vector2(260, 100)
+layout_mode = 2
+text = "David — A skilled warrior..."
+autowrap_mode = 2
+
+[node name="RightPanel" type="VBoxContainer" parent="MainPanel/Root/Content" unique_id=2087308707]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Equiped" type="Label" parent="MainPanel/Root/Content/RightPanel" unique_id=700868213]
+layout_mode = 2
+text = "EQUIPPED"
+
+[node name="EquippedSlots" type="HBoxContainer" parent="MainPanel/Root/Content/RightPanel" unique_id=1844322068]
+layout_mode = 2
+
+[node name="MainHandSlot" type="ColorRect" parent="MainPanel/Root/Content/RightPanel/EquippedSlots" unique_id=504396563]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.695483, 0.757753, 0.7841208, 1)
+
+[node name="OffHandSlot" type="ColorRect" parent="MainPanel/Root/Content/RightPanel/EquippedSlots" unique_id=1619199879]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.63057566, 0.77209383, 0.8288504, 1)
+
+[node name="Weapons" type="Label" parent="MainPanel/Root/Content/RightPanel" unique_id=854636127]
+layout_mode = 2
+text = "WEAPONS"
+
+[node name="WeaponsGridContainer" type="Control" parent="MainPanel/Root/Content/RightPanel" unique_id=1934071608]
+custom_minimum_size = Vector2(256, 320)
+layout_mode = 2
+
+[node name="Utils" type="Label" parent="MainPanel/Root/Content/RightPanel" unique_id=1585618089]
+layout_mode = 2
+text = "UTILS"
+
+[node name="UtilsGridContainer" type="Control" parent="MainPanel/Root/Content/RightPanel" unique_id=955017991]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+
+[node name="Keys" type="Label" parent="MainPanel/Root/Content/RightPanel" unique_id=1781198487]
+layout_mode = 2
+text = "KEYS"
+
+[node name="KeyringContainer" type="Control" parent="MainPanel/Root/Content/RightPanel" unique_id=1031135091]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2

@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://4oj2fidvnrrn" path="res://scenes/ui/HUD.tscn" id="4_ytumw"]
 [ext_resource type="PackedScene" uid="uid://4yek1gwj7wwm" path="res://scenes/world/test_dummy.tscn" id="5_fc6vu"]
 [ext_resource type="PackedScene" uid="uid://dnbxyyota1g8c" path="res://scenes/ui/PauseMenu.tscn" id="6_0u7lr"]
+[ext_resource type="PackedScene" uid="uid://bbt1gig5pmj2w" path="res://scenes/ui/InventoryScreen.tscn" id="7_u3u0o"]
+[ext_resource type="Script" uid="uid://sfbtffcs8smi" path="res://scripts/InventorySeed.cs" id="8_6s7be"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it3e4"]
 size = Vector2(1944.5, 203)
@@ -67,3 +69,8 @@ offset_bottom = -144.71402
 position = Vector2(1426, 491)
 
 [node name="PauseMenu" parent="." unique_id=423315336 instance=ExtResource("6_0u7lr")]
+
+[node name="InventoryScreen" parent="." unique_id=1755528370 instance=ExtResource("7_u3u0o")]
+
+[node name="InventorySeed" type="Node" parent="." unique_id=1034983221]
+script = ExtResource("8_6s7be")

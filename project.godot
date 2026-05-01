@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 PauseManager="*uid://1fs12tvxiiu5"
 InventoryManager="*uid://bdwsqmecde84v"
 
+[display]
+
+window/size/viewport_width=1180
+window/size/viewport_height=680
+
 [dotnet]
 
 project/assembly_name="SellsSwordAcademyTry"

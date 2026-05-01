@@ -39,10 +39,19 @@ public partial class PauseMenu : CanvasLayer
 		PauseManager.Instance.Resume();
 	}
 
-	private void OnInventoryPressed()
+private void OnInventoryPressed()
+{
+	var inventoryScreen = GetTree().Root.GetNodeOrNull<InventoryScreen>("TestRoom/InventoryScreen");
+	if (inventoryScreen != null)
 	{
-		GD.Print("Inventory pressed (Phase 2 will implement this)");
+		inventoryScreen.Open();
+		Hide(); // hide the pause menu so inventory is on top
 	}
+	else
+	{
+		GD.PrintErr("InventoryScreen not found in scene!");
+	}
+}
 
 	private void OnSettingsPressed()
 	{

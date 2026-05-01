@@ -17,17 +17,32 @@ public partial class Item : Resource
 
 	// Returns shape rotated 90° clockwise
 	public List<Vector2I> GetRotatedShape(int rotations = 1)
+{
+	var result = new List<Vector2I>(Shape);
+	for (int i = 0; i < rotations; i++)
 	{
-		var result = new List<Vector2I>(Shape);
-		for (int i = 0; i < rotations; i++)
-		{
-			var rotated = new List<Vector2I>();
-			foreach (var offset in result)
-				rotated.Add(new Vector2I(-offset.Y, offset.X));
-			result = rotated;
-		}
-		return result;
+		var rotated = new List<Vector2I>();
+		foreach (var offset in result)
+			rotated.Add(new Vector2I(-offset.Y, offset.X));
+		result = rotated;
 	}
+
+	// Normalize: shift so the smallest X and Y are 0
+	if (result.Count == 0) return result;
+
+	int minX = int.MaxValue, minY = int.MaxValue;
+	foreach (var offset in result)
+	{
+		if (offset.X < minX) minX = offset.X;
+		if (offset.Y < minY) minY = offset.Y;
+	}
+
+	var normalized = new List<Vector2I>();
+	foreach (var offset in result)
+		normalized.Add(new Vector2I(offset.X - minX, offset.Y - minY));
+
+	return normalized;
+}
 
 	// Returns the bounding box width and height of the shape
 	public Vector2I GetBoundingBox(List<Vector2I> shape = null)
