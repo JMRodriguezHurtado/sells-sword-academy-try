@@ -9,31 +9,9 @@ public partial class InventorySeed : Node
 	{
 		var inventory = InventoryManager.Instance.GetInventory(InventoryManager.CharacterId.David);
 
-		// A short sword (3 cells vertical, sword/blue)
-		var sword = new Weapon
-		{
-			Id = "short_sword",
-			DisplayName = "Short Sword",
-			Type = Weapon.WeaponType.Sword,
-			Hand = Weapon.WeaponHand.MainHand,
-			MaxDurability = 60,
-			CurrentDurability = 60,
-			Shape = ShapeBuilder.VerticalLine(3)
-		};
+// Use the new factory pattern to create a Short Sword
+		var sword = ShortSword.Create();
 		inventory.AddItem(sword);
-
-		// A dagger (2 cells vertical, dagger/red)
-		var dagger = new Weapon
-		{
-			Id = "dagger",
-			DisplayName = "Dagger",
-			Type = Weapon.WeaponType.Dagger,
-			Hand = Weapon.WeaponHand.OffHand,
-			MaxDurability = 40,
-			CurrentDurability = 40,
-			Shape = ShapeBuilder.VerticalLine(2)
-		};
-		inventory.AddItem(dagger);
 
 		// 15 health potions (will stack into 1 slot)
 		var potions = new Potion

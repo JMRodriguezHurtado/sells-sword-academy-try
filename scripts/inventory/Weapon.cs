@@ -6,7 +6,7 @@ using System.Collections.Generic;
 // "what does this weapon do on Q?" rather than hardcoding attacks.
 public partial class Weapon : Item
 {
-	public enum WeaponHand { MainHand, OffHand, EitherHand }
+	public enum WeaponHand { MainHand, OffHand, EitherHand, BothHands }
 	public enum WeaponType { Sword, Dagger, Axe, Hammer, Shield, Staff, Bow, Other }
 
 	[Export] public WeaponType Type { get; set; } = WeaponType.Sword;
@@ -25,9 +25,13 @@ public partial class Weapon : Item
 	// When single-wielding, one weapon provides all four.
 	public Dictionary<string, AttackData> Attacks { get; set; } = new();
 
-	public bool IsBroken => CurrentDurability <= 0;
+	// Whole-weapon abilities — apply to EVERY attack this weapon performs.
+	// Examples: 20% crit chance, lifesteal, bonus damage vs undead.
+	public List<Ability> WeaponAbilities { get; set; } = new();
 
-	// Returns true if hit was registered (false if weapon is already broken)
+	public bool IsBroken => CurrentDurability <= 0;
+	public bool IsTwoHanded => Hand == WeaponHand.BothHands;
+
 	public bool RegisterEnemyHit()
 	{
 		if (IsBroken) return false;
@@ -66,11 +70,14 @@ public partial class AttackData : Resource
 	[Export] public int Damage { get; set; } = 20;
 	[Export] public float Duration { get; set; } = 0.4f;
 	[Export] public float Cooldown { get; set; } = 0.0f;
-	[Export] public float Knockback { get; set; } = 0.0f;
-	[Export] public float HitboxRange { get; set; } = 80.0f;  // distance in front of player
+	[Export] public float HitboxRange { get; set; } = 80.0f;
 
-	// Special behavior tags — controller checks these to know what's special
-	// e.g. "parry_window" means the controller should listen for incoming attacks during this window
+	// Per-attack abilities — only trigger on THIS attack.
+	// Examples: this Q has Freeze, this F has Shield Bash, this R has Parry.
+	public List<Ability> AttackAbilities { get; set; } = new();
+
+	// Tags for special behaviors the controller needs to know about
+	// Examples: "parry_window", "two_handed_swing", "shield_block"
 	[Export] public string[] Tags { get; set; } = new string[0];
 
 	public bool HasTag(string tag) => System.Array.IndexOf(Tags, tag) >= 0;

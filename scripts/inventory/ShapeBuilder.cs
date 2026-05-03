@@ -69,4 +69,32 @@ public static class ShapeBuilder
 			shape.Add(new Vector2I(center, y));
 		return shape;
 	}
+	// === NAMED WEAPON SHAPES ===
+	// Each weapon class uses these so dimensions live in one place.
+	// If we ever want to make swords slightly bigger, change here once.
+
+	// Short sword: 1 wide × 3 tall
+	public static List<Vector2I> ShortSword() => VerticalLine(3);
+
+	// Long sword: 1 wide × 4 tall — needs both hands
+	public static List<Vector2I> LongSword() => VerticalLine(4);
+
+	// Dagger: 1 wide × 2 tall
+	public static List<Vector2I> Dagger() => VerticalLine(2);
+
+	// Battle axe: 3 tall on the left + 2-wide foot at the bottom (L-shape)
+	public static List<Vector2I> BattleAxe() => LShape(3, 2);
+
+	// Hammer: similar to axe but heavier — bigger foot
+	public static List<Vector2I> Hammer() => LShape(3, 3);
+
+	// Shield: 2 wide × 2 tall block
+	public static List<Vector2I> Shield() => Rectangle(2, 2);
+
+	// Staff: 1 wide × 4 tall — needs both hands
+	public static List<Vector2I> Staff() => VerticalLine(4);
+
+	// Bow: T-shape — 3-wide top with a 2-cell stem
+	public static List<Vector2I> Bow() => TShape(3, 2);
+	
 }
