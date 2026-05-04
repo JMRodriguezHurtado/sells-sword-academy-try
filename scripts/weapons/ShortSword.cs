@@ -45,60 +45,67 @@ public static class ShortSword
 	}
 
 	private static Dictionary<string, AttackData> BuildAttacks()
+{
+	return new Dictionary<string, AttackData>
 	{
-		return new Dictionary<string, AttackData>
+		// Q — Light slash (fast, low damage, no special effects)
+		["attack1"] = new AttackData
 		{
-			// Q — Light slash (fast, low damage, no special effects)
-			["attack1"] = new AttackData
-			{
-				AnimationName = "attack1",
-				Damage = 20,
-				Duration = 0.4f,
-				Cooldown = 0.0f,
-				HitboxRange = 80.0f,
-				AttackAbilities = new List<Ability>()
-			},
+			AnimationName = "attack1",
+			Damage = 20,
+			Duration = 0.4f,
+			Cooldown = 0.0f,
+			HitboxRange = 80.0f,
+			HitboxWidth = 80.0f,
+			HitboxHeight = 60.0f,
+			AttackAbilities = new List<Ability>()
+		},
 
-			// E — Heavy slash (slower, more damage, knocks enemies back)
-			["attack2"] = new AttackData
+		// E — Heavy slash (slower, more damage, knocks enemies back, larger hitbox)
+		["attack2"] = new AttackData
+		{
+			AnimationName = "attack2",
+			Damage = 30,
+			Duration = 0.6f,
+			Cooldown = 0.5f,
+			HitboxRange = 90.0f,
+			HitboxWidth = 100.0f,
+			HitboxHeight = 70.0f,
+			AttackAbilities = new List<Ability>
 			{
-				AnimationName = "attack2",
-				Damage = 30,
-				Duration = 0.6f,
-				Cooldown = 0.5f,
-				HitboxRange = 90.0f,
-				AttackAbilities = new List<Ability>
-				{
-					new Pushback { Force = 350.0f, Lift = -100.0f }
-				}
-			},
-
-			// R — Thrust (medium range, chance to bleed)
-			// Note: animation will be added later when we have thrust frames
-			["attack3"] = new AttackData
-			{
-				AnimationName = "attack2",   // reuse attack2 animation for now
-				Damage = 25,
-				Duration = 0.5f,
-				Cooldown = 0.3f,
-				HitboxRange = 110.0f,
-				AttackAbilities = new List<Ability>
-				{
-					new Bleed { TriggerChance = 0.4f, DamagePerTick = 5, Ticks = 3 }
-				}
-			},
-
-			// F — Counter / parry (placeholder — full parry logic comes later)
-			["attack4"] = new AttackData
-			{
-				AnimationName = "attack1",   // reuse attack1 animation for now
-				Damage = 15,
-				Duration = 0.4f,
-				Cooldown = 0.6f,
-				HitboxRange = 70.0f,
-				Tags = new[] { "parry_window" },  // controller will detect this tag later
-				AttackAbilities = new List<Ability>()
+				new Pushback { Force = 350.0f, Lift = -100.0f }
 			}
-		};
-	}
+		},
+
+		// R — Thrust (longer range, narrower hitbox, chance to bleed)
+		["attack3"] = new AttackData
+		{
+			AnimationName = "attack2",
+			Damage = 25,
+			Duration = 0.5f,
+			Cooldown = 0.3f,
+			HitboxRange = 110.0f,
+			HitboxWidth = 60.0f,    // narrower — it's a stab
+			HitboxHeight = 40.0f,
+			AttackAbilities = new List<Ability>
+			{
+				new Bleed { TriggerChance = 0.4f, DamagePerTick = 5, Ticks = 3 }
+			}
+		},
+
+		// F — Counter / parry (placeholder)
+		["attack4"] = new AttackData
+		{
+			AnimationName = "attack1",
+			Damage = 15,
+			Duration = 0.4f,
+			Cooldown = 0.6f,
+			HitboxRange = 70.0f,
+			HitboxWidth = 70.0f,
+			HitboxHeight = 60.0f,
+			Tags = new[] { "parry_window" },
+			AttackAbilities = new List<Ability>()
+		}
+	};
+}
 }

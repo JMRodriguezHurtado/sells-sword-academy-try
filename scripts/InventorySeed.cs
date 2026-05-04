@@ -1,7 +1,7 @@
 using Godot;
 
 // Temporary seed script — adds sample items to David's inventory at startup
-// so the inventory UI has something to display during Phase 2 testing.
+// so we have things to display and test combat with during development.
 // Delete this once the real pickup/loot system is in place.
 public partial class InventorySeed : Node
 {
@@ -9,11 +9,12 @@ public partial class InventorySeed : Node
 	{
 		var inventory = InventoryManager.Instance.GetInventory(InventoryManager.CharacterId.David);
 
-// Use the new factory pattern to create a Short Sword
+		// Create and equip a Short Sword
 		var sword = ShortSword.Create();
 		inventory.AddItem(sword);
+		inventory.EquipWeapon(sword, toMainHand: true);
 
-		// 15 health potions (will stack into 1 slot)
+		// 15 health potions
 		var potions = new Potion
 		{
 			Id = "health_potion",
@@ -36,6 +37,6 @@ public partial class InventorySeed : Node
 		};
 		inventory.AddItem(libraryKey);
 
-		GD.Print("Inventory seeded with sample items.");
+		GD.Print($"Inventory seeded. Equipped: {inventory.MainHand?.DisplayName ?? "(nothing)"}");
 	}
 }

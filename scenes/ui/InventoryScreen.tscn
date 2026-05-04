@@ -4,6 +4,7 @@
 
 [node name="InventoryScreen" type="CanvasLayer" unique_id=1755528370]
 script = ExtResource("1_1w4xw")
+CursorColor = Color(1, 1, 0, 0.34901962)
 
 [node name="Background" type="ColorRect" parent="." unique_id=1829568102]
 anchors_preset = 15

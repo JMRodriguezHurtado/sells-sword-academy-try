@@ -61,7 +61,6 @@ public partial class Weapon : Item
 		return Attacks.TryGetValue(inputAction, out var attack) ? attack : null;
 	}
 }
-
 // Data describing a single attack — animation, damage, range, knockback, special effects.
 // This is what controllers read to perform combat.
 public partial class AttackData : Resource
@@ -70,14 +69,17 @@ public partial class AttackData : Resource
 	[Export] public int Damage { get; set; } = 20;
 	[Export] public float Duration { get; set; } = 0.4f;
 	[Export] public float Cooldown { get; set; } = 0.0f;
-	[Export] public float HitboxRange { get; set; } = 80.0f;
+
+	// Hitbox geometry — each attack defines its own dimensions.
+	// This is what makes weapons feel mechanically distinct.
+	[Export] public float HitboxRange { get; set; } = 80.0f;   // distance in front of player
+	[Export] public float HitboxWidth { get; set; } = 80.0f;   // hitbox horizontal size
+	[Export] public float HitboxHeight { get; set; } = 60.0f;  // hitbox vertical size
 
 	// Per-attack abilities — only trigger on THIS attack.
-	// Examples: this Q has Freeze, this F has Shield Bash, this R has Parry.
 	public List<Ability> AttackAbilities { get; set; } = new();
 
 	// Tags for special behaviors the controller needs to know about
-	// Examples: "parry_window", "two_handed_swing", "shield_block"
 	[Export] public string[] Tags { get; set; } = new string[0];
 
 	public bool HasTag(string tag) => System.Array.IndexOf(Tags, tag) >= 0;
