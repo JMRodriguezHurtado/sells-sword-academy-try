@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dnbxyyota1g8c" path="res://scenes/ui/PauseMenu.tscn" id="6_0u7lr"]
 [ext_resource type="PackedScene" uid="uid://bbt1gig5pmj2w" path="res://scenes/ui/InventoryScreen.tscn" id="7_u3u0o"]
 [ext_resource type="Script" uid="uid://sfbtffcs8smi" path="res://scripts/InventorySeed.cs" id="8_6s7be"]
+[ext_resource type="PackedScene" uid="uid://byi7d51n4r0i8" path="res://scenes/enemies/Skeleton.tscn" id="9_vnu35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it3e4"]
 size = Vector2(1944.5, 203)
@@ -69,8 +70,13 @@ offset_bottom = -144.71402
 position = Vector2(1426, 491)
 
 [node name="PauseMenu" parent="." unique_id=423315336 instance=ExtResource("6_0u7lr")]
+visible = false
 
 [node name="InventoryScreen" parent="." unique_id=1755528370 instance=ExtResource("7_u3u0o")]
+visible = false
 
 [node name="InventorySeed" type="Node" parent="." unique_id=1034983221]
 script = ExtResource("8_6s7be")
+
+[node name="Skeleton" parent="." unique_id=810063287 instance=ExtResource("9_vnu35")]
+position = Vector2(812, 505)

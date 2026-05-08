@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://byi7d51n4r0i8"]
+
+[ext_resource type="Script" uid="uid://db2lv6o28lglb" path="res://scripts/enemies/Grunt.cs" id="1_re5l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2dmn"]
+size = Vector2(400, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vmfh1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbgii"]
+size = Vector2(800, 600)
+
+[node name="Skeleton" type="CharacterBody2D" unique_id=119047634]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_re5l2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1981666286]
+position = Vector2(3.8146961e-06, 2.0861623e-06)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_v2dmn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=582556429]
+sprite_frames = SubResource("SpriteFrames_vmfh1")
+animation = &"walk"
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1208403898]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1257389473]
+position = Vector2(30.000004, 7.6293945e-06)
+shape = SubResource("RectangleShape2D_nbgii")

@@ -194,4 +194,13 @@ public partial class PlayerController : CharacterBody2D
 		if (_playerHealth != null)
 			_playerHealth.HealthChanged -= OnHealthChanged;
 	}
+	
+	// Called by enemies when their attack hits David.
+	// Applies physical knockback so hits feel impactful.
+	public virtual void ApplyKnockbackFromEnemy(float force, float lift, int direction)
+	{
+		if (_isHurt || _isDashing) return; // ignore knockback during hurt/dash for now
+		Velocity = new Vector2(force * direction, lift);
+	}
+	
 }
