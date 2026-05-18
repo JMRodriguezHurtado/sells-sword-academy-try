@@ -1,36 +1,139 @@
 [gd_scene format=3 uid="uid://byi7d51n4r0i8"]
 
 [ext_resource type="Script" uid="uid://db2lv6o28lglb" path="res://scripts/enemies/Grunt.cs" id="1_re5l2"]
+[ext_resource type="Texture2D" uid="uid://pneywxnnr4yp" path="res://assets/sprites/skeleton/skeleton_sheet_1.png" id="2_vmfh1"]
+[ext_resource type="Texture2D" uid="uid://iij43bmc3dkf" path="res://assets/sprites/skeleton/skeleton_sheet_2.png" id="3_nbgii"]
+[ext_resource type="Texture2D" uid="uid://dcfog7m3pe310" path="res://assets/sprites/skeleton/skeleton_sheet_3.png" id="3_xt4x6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v2dmn"]
-size = Vector2(400, 800)
+size = Vector2(270.0001, 255.00015)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi2il"]
+atlas = ExtResource("2_vmfh1")
+region = Rect2(510, 412, 509, 333)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_puq5i"]
+atlas = ExtResource("2_vmfh1")
+region = Rect2(0, 0, 509, 443)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxxut"]
+atlas = ExtResource("2_vmfh1")
+region = Rect2(512, 729, 512, 295)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pip6d"]
+atlas = ExtResource("3_xt4x6")
+region = Rect2(0, 434, 512, 295)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioufq"]
+atlas = ExtResource("3_xt4x6")
+region = Rect2(0, 729, 512, 295)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3td5"]
+atlas = ExtResource("3_xt4x6")
+region = Rect2(512, 729, 512, 295)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbgii"]
+atlas = ExtResource("2_vmfh1")
+region = Rect2(0, 0, 510, 445)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt4x6"]
+atlas = ExtResource("2_vmfh1")
+region = Rect2(510, 0, 510, 445)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05nri"]
+atlas = ExtResource("3_nbgii")
+region = Rect2(0, 0, 510, 445)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owfsc"]
+atlas = ExtResource("3_nbgii")
+region = Rect2(510, 0, 510, 445)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swoyg"]
+atlas = ExtResource("3_nbgii")
+region = Rect2(1, 414, 509, 344)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk5js"]
+atlas = ExtResource("3_nbgii")
+region = Rect2(510, 414, 509, 344)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vmfh1"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi2il")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_puq5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxxut")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pip6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioufq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3td5")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbgii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt4x6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05nri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owfsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swoyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk5js")
+}],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbgii"]
-size = Vector2(800, 600)
+size = Vector2(367.5, 500)
 
 [node name="Skeleton" type="CharacterBody2D" unique_id=119047634]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_re5l2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1981666286]
-position = Vector2(3.8146961e-06, 2.0861623e-06)
-scale = Vector2(0.9999998, 0.9999998)
+position = Vector2(19.999962, 17.499979)
+scale = Vector2(0.9999992, 0.9999992)
 shape = SubResource("RectangleShape2D_v2dmn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=582556429]
 sprite_frames = SubResource("SpriteFrames_vmfh1")
-animation = &"walk"
+animation = &"attack"
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1208403898]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1257389473]
-position = Vector2(30.000004, 7.6293945e-06)
+position = Vector2(191.24997, -69.999954)
+scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_nbgii")

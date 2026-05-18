@@ -11,6 +11,7 @@ public partial class Grunt : EnemyController
 	[Export] public float AttackWindup = 0.3f;       // before hitbox activates
 	[Export] public float AttackStrike = 0.2f;       // hitbox is active
 	[Export] public float AttackRecovery = 0.4f;     // locked in place after strike
+	[Export] public float HitboxOffset = 140.0f;
 
 	[Export] public int AttackDamage = 10;
 	[Export] public float AttackKnockback = 200.0f;
@@ -121,16 +122,17 @@ public partial class Grunt : EnemyController
 
 	// === ATTACK LOGIC ===
 
-	private void StartAttack()
+private void StartAttack()
 	{
 		_attackPhase = AttackPhase.Windup;
 		_attackTimer = AttackWindup;
 		_hitDealtThisAttack = false;
 
-		// Position hitbox in front of grunt
-		_attackHitboxShape.Position = new Vector2(50 * _facingDirection, 0);
+		_attackHitboxShape.Position = new Vector2(HitboxOffset * _facingDirection, 0);
 
 		GD.Print($"{Name} starts attack toward direction {_facingDirection}");
+		GD.Print($"  Hitbox at local pos {_attackHitboxShape.Position}, global pos {_attackHitbox.GlobalPosition}");
+		GD.Print($"  Player at global pos {_player?.GlobalPosition}");
 	}
 
 	private void CheckHitboxOverlap()
